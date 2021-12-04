@@ -28,8 +28,6 @@ int main(int argc, char *argv[]) { // argc引数の数, argv[0] ./a.out, argv[1]
     printf("[DEBUG]buffer   @ %p: \'%s\'\n", buffer, buffer);
     printf("[DEBUG]datafile @ %p: \'%s\'\n", datafile, datafile);
 
-    strncat(buffer, "\n", 1); // 行末に改行を追加
-
     fd = open(datafile, O_WRONLY|O_CREAT|O_APPEND, S_IRUSR|S_IWUSR);
     if(fd == -1) fatal("An error occurred while opening file in main.");
     printf("[DEBUG]file descriptor: %d\n", fd);
