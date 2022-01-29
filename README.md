@@ -18,7 +18,7 @@
 
 `sudo sysctl kernel.randomize_va_space=2` 有効化
 
-`cat /proc/self/maps | grep stack` 確認
+`cat /proc/self/maps | grep stack` 複数回実行してアドレスが変わるか
 
 ## ディレクトリ
 
@@ -26,10 +26,29 @@
 
 `/tmp/notes` simplenote.cで書き込むテキスト
 
-## デバッグ
+## Perl
 
-`gdb -q ./a.out`
+`$ perl -e 'print "A" x 20;'` AAAAAAAAAAAAAAAAAAAA
 
-`(gdb) list 1` 1行目から10行ソース表示。次のプロンプトをEnterで次の10行表示。
+```
+$ uname
+Linux
+$ $(perl -e 'print "uname";')
+Linux
+```
 
-`(gdb) quit` 終了
+## メモリ
+
+低位アドレス
+
+テキストセグメント　マシン語を格納。eipはここの先頭に設定される。
+
+データセグメント　初期化されたグローバル変数、静的変数
+
+bssセグメント　初期化されてないグローバル変数、静的変数
+
+ヒープセグメント　サイズ不定で動的に割り当てられる。
+
+スタックセグメント　関数のローカル変数、コンテキストを格納。FILO(First In Last Out)
+
+高位アドレス
