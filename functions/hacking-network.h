@@ -36,5 +36,5 @@ int recv_line(int sockfd, unsigned char *dest_buffer) {
         }
         ptr++; // 
     }
-    return 0; EOL文字が見つからなかった。
+    return 0; // EOL文字が見つからなかった。
 }

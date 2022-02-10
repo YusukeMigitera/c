@@ -4,10 +4,25 @@
 #include <sys/socket.h> // ソケット関数 bits/socket.hを自動的にインクルード
 #include <netinet/in.h> // ソケットアドレス構造体sockaddr_in
 #include <arpa/inet.h>  // バイト順
-#include "../documents/hacking.h"
+#include "../functions/hacking.h"
 #include <unistd.h>     // close()
 
 #define PORT 7890
+
+/*
+/usr/inclued/netinet/in.h
+struct sockaddr_in
+{
+    __SOCKADDR_COMMON (sin_);
+    in_port_t sin_port;
+    struct in_addr sin_addr;
+
+    unsigned char sin_zero[sizeof (struct sockaddr) -
+        __SOCKADDR_COMMON_SIZE -
+        sizeof (in_port_t) -
+        sizeof (struct in_addr)];
+}
+*/
 
 int main(void) {
     int sockfd, new_sockfd; // sockfd上で待ち受ける、new_fdは新たな接続
