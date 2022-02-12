@@ -30,6 +30,22 @@ $
 ## Address already in use
 
 ```
-$ lsof -i:7890
-$ kill [-9] PID
+$ [sudo] lsof -i:7890
+$ [sudo] kill [-9] PID
 ```
+
+# 権限
+
+```
+$ ls -l network/webroot
+total 48
+-rwxr--r-- 1 yusukemigitera yusukemigitera 46794 Feb 12 13:56 image.jpg
+-rw-r--r-- 1 yusukemigitera yusukemigitera   375 Feb 12 13:57 index.html
+$ gcc network/tinyweb.c
+$ sudo chown root ./a.out
+$ sudo chmod u+s ./a.out
+```
+
+WSLではマウントしたドライブ上のファイルにchmod効かない
+
+1024 よりも小さいポートは予約済みのポートと呼ばれ、 Linux (およびほとんどの UNIX フレーバーや UNIX 様のシステム) では、非 root ユーザーがオープンすることができません。
