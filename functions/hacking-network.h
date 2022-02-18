@@ -38,3 +38,44 @@ int recv_line(int sockfd, unsigned char *dest_buffer) {
     }
     return 0; // EOL文字が見つからなかった。
 }
+
+#define ETHER_ADDR_LEN 6
+#define ETHER_HDR_LEN 14
+
+struct ether_hdr {
+    unsigned char ether_dest_addr[ETHER_ADDR_LEN]; // 宛先(destination)のMACアドレス
+    unsigned char ether_src_addr[ETHER_ADDR_LEN]; // 送信元(source)のMACアドレス
+    unsigned short ether_type; // イーサネットパケットのタイプ
+};
+
+struct ip_hdr { // IPヘッダ　前から順に
+    unsigned char ip_version_and_header_length;
+    unsigned char ip_tos; // type of service
+    unsigned short ip_len;
+    unsigned short ip_id;
+    unsigned short ip_frag_offset;
+    unsigned char ip_ttl; // time to live
+    unsigned char ip_type; // protocol type
+    unsigned short ip_checksum;
+    unsigned int ip_src_addr; // source
+    unsigned int ip_dest_addr; // destination
+};
+
+struct tcp_hdr { // TCPヘッダ　前から順
+    unsigned short tcp_src_port;
+    unsigned short tcp_dest_port;
+    unsigned int tcp_seq; // sequence number
+    unsigned int tcp_ack;
+    unsigned char tcp_reserved:4;
+    unsigned char tcp_offset:4;
+    unsigned char tcp_flags;
+#define TCP_FIN  0x01
+#define TCP_SYN  0x02
+#define TCP_RST  0x04
+#define TCP_PUSH 0x08
+#define TCP_ACK  0x10
+#define TCP_URG  0x20
+    unsigned short tcp_window;
+    unsigned short tcp_checksum;
+    unsigned short tcp_urgent; // 緊急ポインタ
+};
